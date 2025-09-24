@@ -1,19 +1,24 @@
-﻿internal class Program
+﻿namespace Laboratorio6
 {
-    private static void Main(string[] args)
+    internal class Program
     {
-        int num;
-        Console.WriteLine("Digite el numero deseado");
-
-        try {
-            num = Int16.Parse(Console.ReadLine());
-
-        } catch(FormatException ex)
+        private static void Main(string[] args)
         {
-            Console.WriteLine("No ha introducido un digito valido");
-            num = -1;
-        }
+            int num;
+            Console.WriteLine("Digite el numero deseado");
 
-        Console.WriteLine(num);
+            try
+            {
+                num = short.Parse(Console.ReadLine());
+
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine("No ha introducido un digito valido");
+                num = -1;
+            }
+
+            Console.WriteLine(num);
+        }
     }
 }
