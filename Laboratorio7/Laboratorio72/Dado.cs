@@ -12,6 +12,11 @@ namespace Laboratorio72
         private int valor;
         private static Random aleatorio;
 
+        public Dado()
+        {
+            aleatorio = new Random();
+        }
+
         public void Tirar()
         {
             valor = aleatorio.Next(1, 7);
