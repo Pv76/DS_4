@@ -2,6 +2,10 @@
 {
     private static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        Banco banco = new Banco();
+        banco.Operar();
+        banco.DepositosTotales();
+        Console.ReadKey();
+
     }
 }
