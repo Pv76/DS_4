@@ -30,9 +30,9 @@
         {
             txbResultado = new TextBox();
             button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            btnEliminar = new Button();
+            btnPotencia = new Button();
+            btnRaiz = new Button();
+            btnDividir = new Button();
             btnProd = new Button();
             btn9 = new Button();
             btn8 = new Button();
@@ -45,6 +45,15 @@
             btn3 = new Button();
             btn2 = new Button();
             btn1 = new Button();
+            btnResultado = new Button();
+            btnDecimal = new Button();
+            btn0 = new Button();
+            btnSigno = new Button();
+            btnEliminar = new Button();
+            btnClear = new Button();
+            btnClearE = new Button();
+            button11 = new Button();
+            txbCarry = new TextBox();
             SuspendLayout();
             // 
             // txbResultado
@@ -63,48 +72,48 @@
             // button1
             // 
             button1.Font = new Font("Bahnschrift", 12F);
-            button1.Location = new Point(18, 359);
+            button1.Location = new Point(18, 423);
             button1.Name = "button1";
             button1.Size = new Size(230, 90);
             button1.TabIndex = 1;
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnPotencia
             // 
-            button2.Font = new Font("Bahnschrift", 12F);
-            button2.Location = new Point(254, 359);
-            button2.Name = "button2";
-            button2.Size = new Size(230, 90);
-            button2.TabIndex = 2;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            btnPotencia.Font = new Font("Bahnschrift", 12F);
+            btnPotencia.Location = new Point(254, 423);
+            btnPotencia.Name = "btnPotencia";
+            btnPotencia.Size = new Size(230, 90);
+            btnPotencia.TabIndex = 2;
+            btnPotencia.Text = "^";
+            btnPotencia.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnRaiz
             // 
-            button3.Font = new Font("Bahnschrift", 12F);
-            button3.Location = new Point(490, 359);
-            button3.Name = "button3";
-            button3.Size = new Size(230, 90);
-            button3.TabIndex = 3;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            btnRaiz.Font = new Font("Bahnschrift", 12F);
+            btnRaiz.Location = new Point(490, 423);
+            btnRaiz.Name = "btnRaiz";
+            btnRaiz.Size = new Size(230, 90);
+            btnRaiz.TabIndex = 3;
+            btnRaiz.Text = "SQRT";
+            btnRaiz.UseVisualStyleBackColor = true;
             // 
-            // btnEliminar
+            // btnDividir
             // 
-            btnEliminar.Font = new Font("Bahnschrift", 12F);
-            btnEliminar.Location = new Point(726, 359);
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(230, 90);
-            btnEliminar.TabIndex = 4;
-            btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
-            btnEliminar.Click += btnEliminar_Click;
+            btnDividir.Font = new Font("Bahnschrift", 12F);
+            btnDividir.Location = new Point(726, 423);
+            btnDividir.Name = "btnDividir";
+            btnDividir.Size = new Size(230, 90);
+            btnDividir.TabIndex = 4;
+            btnDividir.Text = "/";
+            btnDividir.UseVisualStyleBackColor = true;
+            btnDividir.Click += btnDividir_Click;
             // 
             // btnProd
             // 
             btnProd.Font = new Font("Bahnschrift", 12F);
-            btnProd.Location = new Point(726, 455);
+            btnProd.Location = new Point(726, 519);
             btnProd.Name = "btnProd";
             btnProd.Size = new Size(230, 90);
             btnProd.TabIndex = 8;
@@ -115,7 +124,7 @@
             // btn9
             // 
             btn9.Font = new Font("Bahnschrift", 12F);
-            btn9.Location = new Point(490, 455);
+            btn9.Location = new Point(490, 519);
             btn9.Name = "btn9";
             btn9.Size = new Size(230, 90);
             btn9.TabIndex = 7;
@@ -126,7 +135,7 @@
             // btn8
             // 
             btn8.Font = new Font("Bahnschrift", 12F);
-            btn8.Location = new Point(254, 455);
+            btn8.Location = new Point(254, 519);
             btn8.Name = "btn8";
             btn8.Size = new Size(230, 90);
             btn8.TabIndex = 6;
@@ -137,7 +146,7 @@
             // btn7
             // 
             btn7.Font = new Font("Bahnschrift", 12F);
-            btn7.Location = new Point(18, 455);
+            btn7.Location = new Point(18, 519);
             btn7.Name = "btn7";
             btn7.Size = new Size(230, 90);
             btn7.TabIndex = 5;
@@ -148,7 +157,7 @@
             // btnRestar
             // 
             btnRestar.Font = new Font("Bahnschrift", 12F);
-            btnRestar.Location = new Point(726, 551);
+            btnRestar.Location = new Point(726, 615);
             btnRestar.Name = "btnRestar";
             btnRestar.Size = new Size(230, 90);
             btnRestar.TabIndex = 12;
@@ -159,7 +168,7 @@
             // btn6
             // 
             btn6.Font = new Font("Bahnschrift", 12F);
-            btn6.Location = new Point(490, 551);
+            btn6.Location = new Point(490, 615);
             btn6.Name = "btn6";
             btn6.Size = new Size(230, 90);
             btn6.TabIndex = 11;
@@ -170,7 +179,7 @@
             // btn5
             // 
             btn5.Font = new Font("Bahnschrift", 12F);
-            btn5.Location = new Point(254, 551);
+            btn5.Location = new Point(254, 615);
             btn5.Name = "btn5";
             btn5.Size = new Size(230, 90);
             btn5.TabIndex = 10;
@@ -181,7 +190,7 @@
             // btn4
             // 
             btn4.Font = new Font("Bahnschrift", 12F);
-            btn4.Location = new Point(18, 551);
+            btn4.Location = new Point(18, 615);
             btn4.Name = "btn4";
             btn4.Size = new Size(230, 90);
             btn4.TabIndex = 9;
@@ -192,7 +201,7 @@
             // btnSumar
             // 
             btnSumar.Font = new Font("Bahnschrift", 12F);
-            btnSumar.Location = new Point(726, 647);
+            btnSumar.Location = new Point(726, 711);
             btnSumar.Name = "btnSumar";
             btnSumar.Size = new Size(230, 90);
             btnSumar.TabIndex = 16;
@@ -203,7 +212,7 @@
             // btn3
             // 
             btn3.Font = new Font("Bahnschrift", 12F);
-            btn3.Location = new Point(490, 647);
+            btn3.Location = new Point(490, 711);
             btn3.Name = "btn3";
             btn3.Size = new Size(230, 90);
             btn3.TabIndex = 15;
@@ -214,7 +223,7 @@
             // btn2
             // 
             btn2.Font = new Font("Bahnschrift", 12F);
-            btn2.Location = new Point(254, 647);
+            btn2.Location = new Point(254, 711);
             btn2.Name = "btn2";
             btn2.Size = new Size(230, 90);
             btn2.TabIndex = 14;
@@ -225,7 +234,7 @@
             // btn1
             // 
             btn1.Font = new Font("Bahnschrift", 12F);
-            btn1.Location = new Point(18, 647);
+            btn1.Location = new Point(18, 711);
             btn1.Name = "btn1";
             btn1.Size = new Size(230, 90);
             btn1.TabIndex = 13;
@@ -233,11 +242,116 @@
             btn1.UseVisualStyleBackColor = true;
             btn1.Click += btn1_Click;
             // 
+            // btnResultado
+            // 
+            btnResultado.Font = new Font("Bahnschrift", 12F);
+            btnResultado.Location = new Point(726, 807);
+            btnResultado.Name = "btnResultado";
+            btnResultado.Size = new Size(230, 90);
+            btnResultado.TabIndex = 20;
+            btnResultado.Text = "=";
+            btnResultado.UseVisualStyleBackColor = true;
+            btnResultado.Click += btnResultado_Click;
+            // 
+            // btnDecimal
+            // 
+            btnDecimal.Font = new Font("Bahnschrift", 12F);
+            btnDecimal.Location = new Point(490, 807);
+            btnDecimal.Name = "btnDecimal";
+            btnDecimal.Size = new Size(230, 90);
+            btnDecimal.TabIndex = 19;
+            btnDecimal.Text = ".";
+            btnDecimal.UseVisualStyleBackColor = true;
+            // 
+            // btn0
+            // 
+            btn0.Font = new Font("Bahnschrift", 12F);
+            btn0.Location = new Point(254, 807);
+            btn0.Name = "btn0";
+            btn0.Size = new Size(230, 90);
+            btn0.TabIndex = 18;
+            btn0.Text = "0";
+            btn0.UseVisualStyleBackColor = true;
+            btn0.Click += btn0_Click;
+            // 
+            // btnSigno
+            // 
+            btnSigno.Font = new Font("Bahnschrift", 12F);
+            btnSigno.Location = new Point(18, 807);
+            btnSigno.Name = "btnSigno";
+            btnSigno.Size = new Size(230, 90);
+            btnSigno.TabIndex = 17;
+            btnSigno.Text = "+/-";
+            btnSigno.UseVisualStyleBackColor = true;
+            // 
+            // btnEliminar
+            // 
+            btnEliminar.Font = new Font("Bahnschrift", 12F);
+            btnEliminar.Location = new Point(726, 327);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(230, 90);
+            btnEliminar.TabIndex = 24;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
+            // 
+            // btnClear
+            // 
+            btnClear.Font = new Font("Bahnschrift", 12F);
+            btnClear.Location = new Point(490, 327);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(230, 90);
+            btnClear.TabIndex = 23;
+            btnClear.Text = "C";
+            btnClear.UseVisualStyleBackColor = true;
+            // 
+            // btnClearE
+            // 
+            btnClearE.Font = new Font("Bahnschrift", 12F);
+            btnClearE.Location = new Point(254, 327);
+            btnClearE.Name = "btnClearE";
+            btnClearE.Size = new Size(230, 90);
+            btnClearE.TabIndex = 22;
+            btnClearE.Text = "CE";
+            btnClearE.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            button11.Font = new Font("Bahnschrift", 12F);
+            button11.Location = new Point(18, 327);
+            button11.Name = "button11";
+            button11.Size = new Size(230, 90);
+            button11.TabIndex = 21;
+            button11.Text = "button11";
+            button11.UseVisualStyleBackColor = true;
+            // 
+            // txbCarry
+            // 
+            txbCarry.Font = new Font("Bahnschrift", 15.9000006F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txbCarry.Location = new Point(12, 6);
+            txbCarry.Multiline = true;
+            txbCarry.Name = "txbCarry";
+            txbCarry.ReadOnly = true;
+            txbCarry.RightToLeft = RightToLeft.No;
+            txbCarry.Size = new Size(944, 64);
+            txbCarry.TabIndex = 25;
+            txbCarry.Text = "0";
+            txbCarry.TextAlign = HorizontalAlignment.Right;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(968, 912);
+            Controls.Add(txbCarry);
+            Controls.Add(btnEliminar);
+            Controls.Add(btnClear);
+            Controls.Add(btnClearE);
+            Controls.Add(button11);
+            Controls.Add(btnResultado);
+            Controls.Add(btnDecimal);
+            Controls.Add(btn0);
+            Controls.Add(btnSigno);
             Controls.Add(btnSumar);
             Controls.Add(btn3);
             Controls.Add(btn2);
@@ -250,9 +364,9 @@
             Controls.Add(btn9);
             Controls.Add(btn8);
             Controls.Add(btn7);
-            Controls.Add(btnEliminar);
-            Controls.Add(button3);
-            Controls.Add(button2);
+            Controls.Add(btnDividir);
+            Controls.Add(btnRaiz);
+            Controls.Add(btnPotencia);
             Controls.Add(button1);
             Controls.Add(txbResultado);
             Name = "Form1";
@@ -263,12 +377,10 @@
         }
 
         #endregion
-
-        private TextBox txbResultado;
         private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button btnEliminar;
+        private Button btnPotencia;
+        private Button btnRaiz;
+        private Button btnDividir;
         private Button btnProd;
         private Button btn9;
         private Button btn8;
@@ -280,6 +392,16 @@
         private Button btnSumar;
         private Button btn3;
         private Button btn2;
-        private Button btn1;
+        private Button btnResultado;
+        private Button btnDecimal;
+        private Button btn0;
+        private Button btnSigno;
+        private Button btnEliminar;
+        private Button btnClear;
+        private Button btnClearE;
+        private Button button11;
+        public Button btn1;
+        public TextBox txbResultado;
+        public TextBox txbCarry;
     }
 }
