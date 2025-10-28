@@ -1,3 +1,6 @@
+using Microsoft.VisualBasic.Logging;
+using System.Linq.Expressions;
+
 namespace Proyecto1
 {
 
@@ -83,7 +86,27 @@ namespace Proyecto1
 
         private void btnResultado_Click(object sender, EventArgs e)
         {
-
+            if(txbResultado.Text.Length == 0)
+            {
+                txbResultado.Text = carry.ToString();
+                carry = 0;
+                txbCarry.Text = carry.ToString();
+                txbCarry.Hide();
+            }
+            else
+            {
+                int val, resultado;
+                switch (txbCarry.Text.Last())
+                {
+                    case '+':
+                        val = Int32.Parse(txbResultado.Text.Trim());
+                        resultado = op.Sumar(val, carry);
+                        carry = resultado;
+                        txbCarry.Text = String.Format($"{carry.ToString()} {btnSumar.Text}");
+                        txbResultado.Text = "";
+                        break;
+                }
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -93,14 +116,30 @@ namespace Proyecto1
 
         private void btnSumar_Click(object sender, EventArgs e)
         {
+            txbCarry.Show();
             if (carry == 0)
             {
-                carry = Int32.Parse(txbResultado.Text.Trim());
+                carry = Int32.Parse(txbResultado.Text.Trim()); 
                 txbCarry.Text = String.Format($"{carry.ToString()} {btnSumar.Text}");
                 txbResultado.Text = "";
             }
             else
-                txbResultado.Text = op.Sumar(txbResultado.Text, carry).ToString();
+            {
+                int resultado, val;
+                if (txbResultado.Text.Length == 0)
+                {
+                    
+                }else
+                {
+                    val = Int32.Parse(txbResultado.Text.Trim());
+                    resultado = op.Sumar(val, carry);
+                    carry = resultado;
+                    txbCarry.Text = String.Format($"{carry.ToString()} {btnSumar.Text}");
+                    txbResultado.Text = "";
+                }
+
+            }
+                
         }
 
         private void btnRestar_Click(object sender, EventArgs e)
@@ -152,11 +191,9 @@ namespace Proyecto1
                 return val.Substring(0, val.Length - 1);
         }
 
-        public int Sumar(string val, int carry)
+        public int Sumar(int val, int carry)
         {
-            int calculo = Int32.Parse(val);
-
-            return calculo + carry;
+            return val + carry;
         }
     }
 }
