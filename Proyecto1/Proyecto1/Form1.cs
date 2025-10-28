@@ -86,7 +86,7 @@ namespace Proyecto1
 
         private void btnResultado_Click(object sender, EventArgs e)
         {
-            if(txbResultado.Text.Length == 0)
+            if (txbResultado.Text.Length == 0)
             {
                 txbResultado.Text = carry.ToString();
                 carry = 0;
@@ -105,6 +105,31 @@ namespace Proyecto1
                         txbCarry.Text = String.Format($"{carry.ToString()} {btnSumar.Text}");
                         txbResultado.Text = "";
                         break;
+
+                    case '-':
+                        val = Int32.Parse(txbResultado.Text.Trim());
+                        resultado = op.Restar(val, carry);
+                        carry = resultado;
+                        txbCarry.Text = String.Format($"{carry.ToString()} {btnRestar.Text}");
+                        txbResultado.Text = "";
+                        break;
+
+                    case 'x':
+                        val = Int32.Parse(txbResultado.Text.Trim());
+                        resultado = op.Producto(val, carry);
+                        carry = resultado;
+                        txbCarry.Text = String.Format($"{carry.ToString()} {btnProd.Text}");
+                        txbResultado.Text = "";
+                        break;
+
+                    case '/':
+                        val = Int32.Parse(txbResultado.Text.Trim());
+                        resultado = op.Dividir(val, carry);
+                        carry = resultado;
+                        txbCarry.Text = String.Format($"{carry.ToString()} {btnDividir.Text}");
+                        txbResultado.Text = "";
+                        break;
+
                 }
             }
         }
@@ -119,7 +144,7 @@ namespace Proyecto1
             txbCarry.Show();
             if (carry == 0)
             {
-                carry = Int32.Parse(txbResultado.Text.Trim()); 
+                carry = Int32.Parse(txbResultado.Text.Trim());
                 txbCarry.Text = String.Format($"{carry.ToString()} {btnSumar.Text}");
                 txbResultado.Text = "";
             }
@@ -128,8 +153,9 @@ namespace Proyecto1
                 int resultado, val;
                 if (txbResultado.Text.Length == 0)
                 {
-                    
-                }else
+
+                }
+                else
                 {
                     val = Int32.Parse(txbResultado.Text.Trim());
                     resultado = op.Sumar(val, carry);
@@ -137,26 +163,117 @@ namespace Proyecto1
                     txbCarry.Text = String.Format($"{carry.ToString()} {btnSumar.Text}");
                     txbResultado.Text = "";
                 }
-
             }
-                
         }
 
         private void btnRestar_Click(object sender, EventArgs e)
         {
+            txbCarry.Show();
+            if (carry == 0)
+            {
+                carry = Int32.Parse(txbResultado.Text);
+                txbCarry.Text = String.Format($"{carry.ToString()} {btnRestar.Text}");
+                txbResultado.Text = "";
+            }
+            else
+            {
+                int resultado, val;
+                if (txbResultado.Text.Length == 0)
+                {
 
+                }
+                else
+                {
+                    val = Int32.Parse(txbResultado.Text);
+                    resultado = op.Restar(val, carry);
+                    carry = resultado;
+                    txbCarry.Text = String.Format($"{carry.ToString()} {btnRestar.Text}");
+                    txbResultado.Text = "";
+                }
+            }
         }
 
         private void btnProd_Click(object sender, EventArgs e)
         {
+            txbCarry.Show();
+            if (carry == 0)
+            {
+                carry = Int32.Parse(txbResultado.Text.Trim());
+                txbCarry.Text = String.Format($"{carry.ToString()} {btnProd.Text}");
+                txbResultado.Text = "";
+            }
+            else
+            {
+                int resultado, val;
+                if (txbResultado.Text.Length == 0)
+                {
 
+                }
+                else
+                {
+                    val = Int32.Parse(txbResultado.Text.Trim());
+                    resultado = op.Producto(val, carry);
+                    carry = resultado;
+                    txbCarry.Text = String.Format($"{carry.ToString()} {btnProd.Text}");
+                    txbResultado.Text = "";
+                }
+            }
         }
         private void btnDividir_Click(object sender, EventArgs e)
         {
+            txbCarry.Show();
+            if (carry == 0)
+            {
+                carry = Int32.Parse(txbResultado.Text.Trim());
+                txbCarry.Text = String.Format($"{carry.ToString()} {btnDividir.Text}");
+                txbResultado.Text = "";
+            }
+            else
+            {
+                int resultado, val;
+                if (txbResultado.Text.Length == 0)
+                {
 
+                }
+                else
+                {
+                    val = Int32.Parse(txbResultado.Text.Trim());
+                    resultado = op.Dividir(val, carry);
+                    carry = resultado;
+                    txbCarry.Text = String.Format($"{carry.ToString()} {btnDividir.Text}");
+                    txbResultado.Text = "";
+                }
+            }
+        }
+        private void btnSigno_Click(object sender, EventArgs e)
+        {
+            int val;
+            val = Int32.Parse(txbResultado.Text);
+
+            if (val > 0)
+            {
+                val = val * -1;
+            }
+            else if (val < 0)
+            {
+                val = Math.Abs(val);
+            }
+
+            txbResultado.Text = val.ToString();
         }
 
+        private void btnClearE_Click(object sender, EventArgs e)
+        {
+            txbResultado.Text = "";
+        }
 
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txbResultado.Text = "";
+            txbCarry.Text = "";
+            txbCarry.Hide();
+            carry = 0;
+        }
     }
 
     public class Operaciones()
@@ -174,7 +291,6 @@ namespace Proyecto1
             }
             else
                 return val + num;
-
         }
 
         public string Eliminar(string val)
@@ -183,7 +299,7 @@ namespace Proyecto1
             {
                  return "0";
             }
-            else if (val.Length == 1)
+            else if (val.Length == 0)
             {
                 return "0";
             }
@@ -194,6 +310,20 @@ namespace Proyecto1
         public int Sumar(int val, int carry)
         {
             return val + carry;
+        }
+        public int Restar(int val, int carry)
+        {
+            return carry - val;
+        }
+
+        public int Producto(int val, int carry)
+        {
+            return val * carry;
+        }
+
+        public int Dividir(int val, int carry)
+        {
+            return carry / val;
         }
     }
 }

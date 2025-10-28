@@ -63,10 +63,11 @@
             txbResultado.Multiline = true;
             txbResultado.Name = "txbResultado";
             txbResultado.ReadOnly = true;
-            txbResultado.RightToLeft = RightToLeft.Yes;
+            txbResultado.RightToLeft = RightToLeft.No;
             txbResultado.Size = new Size(944, 100);
             txbResultado.TabIndex = 0;
             txbResultado.Text = "0";
+            txbResultado.TextAlign = HorizontalAlignment.Right;
             txbResultado.TextChanged += textBox1_TextChanged;
             // 
             // button1
@@ -283,6 +284,7 @@
             btnSigno.TabIndex = 17;
             btnSigno.Text = "+/-";
             btnSigno.UseVisualStyleBackColor = true;
+            btnSigno.Click += btnSigno_Click;
             // 
             // btnEliminar
             // 
@@ -304,6 +306,7 @@
             btnClear.TabIndex = 23;
             btnClear.Text = "C";
             btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
             // btnClearE
             // 
@@ -314,6 +317,7 @@
             btnClearE.TabIndex = 22;
             btnClearE.Text = "CE";
             btnClearE.UseVisualStyleBackColor = true;
+            btnClearE.Click += btnClearE_Click;
             // 
             // button11
             // 
