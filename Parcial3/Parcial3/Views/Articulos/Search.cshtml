@@ -1,0 +1,186 @@
+﻿@model Parcial3.Models.ArticuloSearchViewModel
+
+@{
+    ViewData["Title"] = "Búsqueda Avanzada";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-info text-white">
+            <h3 class="mb-0">
+                <i class="fas fa-search"></i> Búsqueda Avanzada de Artículos
+            </h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="Search" method="post">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="Titulo" class="form-label fw-bold"></label>
+                        <input asp-for="Titulo" class="form-control" placeholder="Buscar por título" />
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Autor" class="form-label fw-bold"></label>
+                        <input asp-for="Autor" class="form-control" placeholder="Nombre o apellido del autor" />
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label asp-for="PalabraClave" class="form-label fw-bold"></label>
+                        <input asp-for="PalabraClave" class="form-control" placeholder="Palabra clave" />
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="RevistaID" class="form-label fw-bold">Revista</label>
+                        <select asp-for="RevistaID" asp-items="ViewBag.Revistas" class="form-select">
+                            <option value="">-- Todas las revistas --</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="LineaID" class="form-label fw-bold">Línea de Investigación</label>
+                        <select asp-for="LineaID" asp-items="ViewBag.Lineas" class="form-select">
+                            <option value="">-- Todas las líneas --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label asp-for="FechaDesde" class="form-label fw-bold"></label>
+                        <input asp-for="FechaDesde" type="date" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="FechaHasta" class="form-label fw-bold"></label>
+                        <input asp-for="FechaHasta" type="date" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="TipoDocumento" class="form-label fw-bold"></label>
+                        <select asp-for="TipoDocumento" class="form-select">
+                            <option value="">-- Todos --</option>
+                            <option value="Artículo de Investigación">Artículo de Investigación</option>
+                            <option value="Informe Técnico">Informe Técnico</option>
+                            <option value="Tesis">Tesis</option>
+                            <option value="Capítulo de Libro">Capítulo de Libro</option>
+                            <option value="Paper de Conferencia">Paper de Conferencia</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="Estado" class="form-label fw-bold"></label>
+                        <select asp-for="Estado" class="form-select">
+                            <option value="">-- Todos --</option>
+                            <option value="Publicado">Publicado</option>
+                            <option value="En Revisión">En Revisión</option>
+                            <option value="Borrador">Borrador</option>
+                            <option value="Aceptado">Aceptado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary btn-lg me-2">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                        <a asp-action="Search" class="btn btn-secondary btn-lg">
+                            <i class="fas fa-redo"></i> Limpiar
+                        </a>
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                            <i class="fas fa-arrow-left"></i> Volver
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model.Resultados != null)
+    {
+        <div class="card shadow mt-4">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">
+                    <i class="fas fa-list"></i> Resultados de la Búsqueda
+                    <span class="badge bg-light text-dark">@Model.Resultados.Count resultados</span>
+                </h4>
+            </div>
+            <div class="card-body">
+                @if (Model.Resultados.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Autores</th>
+                                    <th>Revista</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var articulo in Model.Resultados)
+                                {
+                                    <tr>
+                                        <td>
+                                            <strong>@articulo.Titulo</strong>
+                                            @if (!string.IsNullOrEmpty(articulo.DOI))
+                                            {
+                                                <br />
+                                                <small class="text-muted">DOI: @articulo.DOI</small>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (articulo.ArticuloAutores != null && articulo.ArticuloAutores.Any())
+                                            {
+                                                var autores = articulo.ArticuloAutores.OrderBy(aa => aa.OrdenAutor);
+                                                @string.Join(", ", autores.Select(aa => aa.Autor.NombreCompleto))
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (articulo.Revista != null)
+                                            {
+                                                @articulo.Revista.NombreRevista
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (articulo.FechaPublicacion.HasValue)
+                                            {
+                                                @articulo.FechaPublicacion.Value.ToString("dd/MM/yyyy")
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(articulo.Estado))
+                                            {
+                                                var badgeClass = articulo.Estado == "Publicado" ? "bg-success" :
+                                                articulo.Estado == "En Revisión" ? "bg-warning" : "bg-secondary";
+                                                <span class="badge @badgeClass">@articulo.Estado</span>
+                                            }
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="btn-group" role="group">
+                                                <a asp-action="Details" asp-route-id="@articulo.ArticuloID"
+                                                   class="btn btn-sm btn-info" title="Ver detalles">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a asp-action="Edit" asp-route-id="@articulo.ArticuloID"
+                                                   class="btn btn-sm btn-warning" title="Editar">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-warning text-center" role="alert">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        No se encontraron artículos que coincidan con los criterios de búsqueda.
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

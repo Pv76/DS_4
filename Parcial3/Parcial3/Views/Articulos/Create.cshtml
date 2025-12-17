@@ -1,0 +1,183 @@
+﻿@model Parcial3.Models.Articulo
+
+@{
+    ViewData["Title"] = "Nuevo Artículo";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-plus-circle"></i> Registrar Nuevo Artículo Científico
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label asp-for="Titulo" class="form-label fw-bold"></label>
+                                <input asp-for="Titulo" class="form-control" placeholder="Título completo del artículo" />
+                                <span asp-validation-for="Titulo" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label asp-for="Resumen" class="form-label fw-bold"></label>
+                                <textarea asp-for="Resumen" class="form-control" rows="4"
+                                          placeholder="Resumen del contenido del artículo"></textarea>
+                                <span asp-validation-for="Resumen" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">
+                                    <i class="fas fa-users"></i> Autores
+                                </label>
+                                <div class="border rounded p-3 bg-light">
+                                    @foreach (var autor in ViewBag.Autores as List<Parcial3.Models.Autor>)
+                                    {
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                   name="autoresSeleccionados" value="@autor.AutorID"
+                                                   id="autor_@autor.AutorID">
+                                            <label class="form-check-label" for="autor_@autor.AutorID">
+                                                @autor.NombreCompleto
+                                                <small class="text-muted">(@autor.Institucion)</small>
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                                <small class="text-muted">Seleccione los autores en orden de aparición</small>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="RevistaID" class="form-label fw-bold"></label>
+                                <select asp-for="RevistaID" asp-items="ViewBag.Revistas" class="form-select">
+                                    <option value="">-- Seleccione una revista --</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="FechaPublicacion" class="form-label fw-bold"></label>
+                                <input asp-for="FechaPublicacion" type="date" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="Volumen" class="form-label fw-bold"></label>
+                                <input asp-for="Volumen" class="form-control" placeholder="Ej: 45" />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Numero" class="form-label fw-bold"></label>
+                                <input asp-for="Numero" class="form-control" placeholder="Ej: 3" />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Paginas" class="form-label fw-bold"></label>
+                                <input asp-for="Paginas" class="form-control" placeholder="Ej: 234-256" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="DOI" class="form-label fw-bold"></label>
+                                <input asp-for="DOI" class="form-control" placeholder="10.1234/ejemplo.2024.001" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Palabras_Clave" class="form-label fw-bold"></label>
+                                <input asp-for="Palabras_Clave" class="form-control"
+                                       placeholder="Separadas por comas" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="TipoDocumento" class="form-label fw-bold"></label>
+                                <select asp-for="TipoDocumento" class="form-select">
+                                    <option value="">-- Seleccione --</option>
+                                    <option value="Artículo de Investigación">Artículo de Investigación</option>
+                                    <option value="Informe Técnico">Informe Técnico</option>
+                                    <option value="Tesis">Tesis</option>
+                                    <option value="Capítulo de Libro">Capítulo de Libro</option>
+                                    <option value="Paper de Conferencia">Paper de Conferencia</option>
+                                    <option value="Revisión">Revisión</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Estado" class="form-label fw-bold"></label>
+                                <select asp-for="Estado" class="form-select">
+                                    <option value="">-- Seleccione --</option>
+                                    <option value="Publicado">Publicado</option>
+                                    <option value="En Revisión">En Revisión</option>
+                                    <option value="Borrador">Borrador</option>
+                                    <option value="Aceptado">Aceptado</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="UbicacionFisica" class="form-label fw-bold"></label>
+                                <input asp-for="UbicacionFisica" class="form-control"
+                                       placeholder="Ej: Biblioteca - Estante A3" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">
+                                    <i class="fas fa-project-diagram"></i> Líneas de Investigación
+                                </label>
+                                <div class="border rounded p-3 bg-light">
+                                    @foreach (var linea in ViewBag.Lineas as List<Parcial3.Models.LineaInvestigacion>)
+                                    {
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox"
+                                                   name="lineasSeleccionadas" value="@linea.LineaID"
+                                                   id="linea_@linea.LineaID">
+                                            <label class="form-check-label" for="linea_@linea.LineaID">
+                                                @linea.NombreLinea
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label asp-for="ArchivoDigital" class="form-label fw-bold"></label>
+                                <input asp-for="ArchivoDigital" class="form-control"
+                                       placeholder="Ruta o URL del archivo PDF" />
+                                <small class="text-muted">
+                                    Ingrese la ruta del archivo digital o URL donde está almacenado
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-success btn-lg me-2">
+                                    <i class="fas fa-save"></i> Guardar Artículo
+                                </button>
+                                <a asp-action="Index" class="btn btn-secondary btn-lg">
+                                    <i class="fas fa-times"></i> Cancelar
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

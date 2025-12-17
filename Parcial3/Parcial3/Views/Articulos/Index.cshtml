@@ -1,0 +1,155 @@
+﻿@model IEnumerable<Parcial3.Models.Articulo>
+
+@{
+    ViewData["Title"] = "Gestión de Artículos Científicos";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-primary">
+            <i class="fas fa-file-alt"></i> Artículos Científicos
+        </h1>
+        <div>
+            <a asp-action="Search" class="btn btn-info me-2">
+                <i class="fas fa-search"></i> Búsqueda Avanzada
+            </a>
+            <a asp-action="Create" class="btn btn-success">
+                <i class="fas fa-plus"></i> Nuevo Artículo
+            </a>
+        </div>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Título</th>
+                            <th>Autores</th>
+                            <th>Revista</th>
+                            <th>Fecha Publicación</th>
+                            <th>Estado</th>
+                            <th>Líneas de Investigación</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <strong>@item.Titulo</strong>
+                                    @if (!string.IsNullOrEmpty(item.DOI))
+                                    {
+                                        <br />
+                                        <small class="text-muted">DOI: @item.DOI</small>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.ArticuloAutores != null && item.ArticuloAutores.Any())
+                                    {
+                                        var autores = item.ArticuloAutores.OrderBy(aa => aa.OrdenAutor);
+                                        @string.Join(", ", autores.Select(aa => aa.Autor.NombreCompleto))
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Sin autores</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Revista != null)
+                                    {
+                                        @item.Revista.NombreRevista
+                                        if (!string.IsNullOrEmpty(item.Revista.Cuartil))
+                                        {
+                                            <span class="badge bg-info">@item.Revista.Cuartil</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">No especificada</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.FechaPublicacion.HasValue)
+                                    {
+                                        @item.FechaPublicacion.Value.ToString("dd/MM/yyyy")
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Sin fecha</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.Estado))
+                                    {
+                                        var badgeClass = item.Estado == "Publicado" ? "bg-success" :
+                                        item.Estado == "En Revisión" ? "bg-warning" : "bg-secondary";
+                                        <span class="badge @badgeClass">@item.Estado</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.ArticuloLineas != null && item.ArticuloLineas.Any())
+                                    {
+                                        foreach (var linea in item.ArticuloLineas)
+                                        {
+                                            <span class="badge bg-primary me-1">@linea.LineaInvestigacion.NombreLinea</span>
+                                        }
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Details" asp-route-id="@item.ArticuloID"
+                                           class="btn btn-sm btn-info" title="Ver detalles">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@item.ArticuloID"
+                                           class="btn btn-sm btn-warning" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.ArticuloID"
+                                           class="btn btn-sm btn-danger" title="Eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info text-center" role="alert">
+                    <i class="fas fa-info-circle"></i> No hay artículos registrados.
+                    <a asp-action="Create" class="alert-link">Haz clic aquí para crear el primero</a>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <p class="text-muted">
+            <i class="fas fa-database"></i> Total de artículos: <strong>@Model.Count()</strong>
+        </p>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto-cerrar alertas después de 5 segundos
+        setTimeout(function() {
+            $('.alert').fadeOut('slow');
+        }, 5000);
+    </script>
+}
